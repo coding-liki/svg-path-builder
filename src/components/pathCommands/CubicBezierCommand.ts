@@ -1,21 +1,15 @@
 import AbstractCommand from "./AbstractCommand";
 
 export default class CubicBezierCommand extends AbstractCommand {
-    private readonly startControlX?: number = undefined;
-    private readonly startControlY?: number = undefined;
-    private endControlX: number;
-    private endControlY: number;
-    private endX: number;
-    private endY: number;
-
-    constructor(endX: number, endY: number, endControlX: number, endControlY: number, startControlX: number | undefined = undefined, startControlY: number | undefined = undefined) {
+    constructor(
+        private endX: number,
+        private endY: number,
+        private endControlX: number,
+        private endControlY: number,
+        private readonly startControlX?: number,
+        private readonly startControlY?: number
+    ) {
         super();
-        this.startControlX = startControlX;
-        this.startControlY = startControlY;
-        this.endControlX = endControlX;
-        this.endControlY = endControlY;
-        this.endX = endX;
-        this.endY = endY;
     }
 
     public build = (): string => {
@@ -34,5 +28,4 @@ export default class CubicBezierCommand extends AbstractCommand {
             [this.endX, this.endY].join(",")
         ].join(" ");
     }
-
 }

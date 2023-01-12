@@ -1,13 +1,11 @@
 import AbstractCommand from "./AbstractCommand";
 
 export default class LineCommand extends AbstractCommand {
-    private readonly x?: number;
-    private readonly y?: number;
-
-    constructor(x: number | undefined = undefined, y: number | undefined = undefined) {
+    constructor(
+        private readonly x?: number,
+        private readonly y?: number
+    ) {
         super();
-        this.x = x;
-        this.y = y;
     }
 
     public build = (): string => {
@@ -25,5 +23,4 @@ export default class LineCommand extends AbstractCommand {
 
         return "";
     }
-
 }

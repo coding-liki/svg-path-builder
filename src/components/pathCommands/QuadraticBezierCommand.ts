@@ -1,17 +1,13 @@
 import AbstractCommand from "./AbstractCommand";
 
 export default class QuadraticBezierCommand extends AbstractCommand {
-    private readonly endControlX?: number = undefined;
-    private readonly endControlY?: number = undefined;
-    private endX: number;
-    private endY: number;
-
-    constructor(endX: number, endY: number, endControlX: number | undefined = undefined, endControlY: number | undefined = undefined) {
+    constructor(
+        private endX: number,
+        private endY: number,
+        private readonly endControlX?: number,
+        private readonly endControlY?: number
+    ) {
         super();
-        this.endControlX = endControlX;
-        this.endControlY = endControlY;
-        this.endX = endX;
-        this.endY = endY;
     }
 
     public build = (): string => {

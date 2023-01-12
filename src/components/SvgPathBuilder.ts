@@ -9,17 +9,18 @@ import {
 import {LARGE_FLAG, SWEEP_FLAG} from "./pathCommands/ArcCommand";
 
 export default class SvgPathBuilder {
-    private path: string = "";
     private isAbsolute: boolean = false;
     private commands: CommandInterface[] = [];
 
     public absolute = (): SvgPathBuilder => {
         this.isAbsolute = true;
+
         return this;
     };
 
     public relative = (): SvgPathBuilder => {
         this.isAbsolute = false;
+
         return this;
     };
 
@@ -28,13 +29,8 @@ export default class SvgPathBuilder {
     public close = (): SvgPathBuilder => {
         this.commands.push(
             new class implements CommandInterface {
-                build(): string {
-                    return "z";
-                }
-
-                setAbsolute(absolute: boolean): CommandInterface {
-                    return this;
-                }
+                public build = (): string => "z";
+                public setAbsolute = (absolute: boolean): CommandInterface => this;
             }
         )
 
@@ -53,6 +49,7 @@ export default class SvgPathBuilder {
         this.commands.push(
             (new LineCommand(x, y)).setAbsolute(this.isAbsolute)
         );
+
         return this;
     }
 
@@ -60,6 +57,7 @@ export default class SvgPathBuilder {
         this.commands.push(
             (new LineCommand(undefined, y)).setAbsolute(this.isAbsolute)
         );
+
         return this;
     }
 
@@ -67,6 +65,7 @@ export default class SvgPathBuilder {
         this.commands.push(
             (new LineCommand(x)).setAbsolute(this.isAbsolute)
         );
+
         return this;
     }
 
@@ -74,6 +73,7 @@ export default class SvgPathBuilder {
         this.commands.push(
             (new ArcCommand(radiusX, radiusY, angle, largeFlag, sweepFlag, toX, toY)).setAbsolute(this.isAbsolute)
         );
+
         return this;
     }
 
